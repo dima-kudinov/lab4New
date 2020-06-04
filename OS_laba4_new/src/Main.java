@@ -1,21 +1,25 @@
-package laba4;
 
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Graphics;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.Color;
+import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 
 public class Main {
-
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -226,4 +230,3 @@ public class Main {
 
 	}
 }
-
