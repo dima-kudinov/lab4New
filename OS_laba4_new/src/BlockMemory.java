@@ -5,21 +5,22 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class BlockMemory {
-	public static ArrayList<DiskBlock> memory;
+	public static ArrayList<DiskBlock> memory; 
 	public static int count = 128;
 
 	public BlockMemory() {
 		memory = new ArrayList<DiskBlock>();
 		for (int i = 0; i < count; i++) {
-			memory.add(i, new DiskBlock(-1, i));
+			memory.add(i, new DiskBlock(-1));
 		}
 	}
+
 	public void Visual_Memory(Graphics g, int width, int height) {
-		int cellHeight = 20; 
+		int cellHeight = 20;
 		int cellWidth = 20;
 		int chsize = 0;
-		int left = 0; 
-		int top = 0; 
+		int left = 0;
+		int top = 0;
 		for (int i = 0; i < count; i++) {
 			left = chsize * cellWidth;
 			chsize++;
@@ -34,7 +35,7 @@ public class BlockMemory {
 			g.fillRect(left, top, cellWidth, cellHeight);
 			g.setColor(Color.WHITE);
 			g.drawRect(left, top, cellWidth, cellHeight);
-			g.drawString(memory.get(i).getFileId()+1 + "", left + 5, top + 20);
+			g.drawString(memory.get(i).getFileId() + 1 + "", left + 5, top + 20);
 			if (chsize == 20) {
 				top += cellHeight;
 				chsize = 0;

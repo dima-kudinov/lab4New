@@ -8,40 +8,36 @@ import javax.swing.JOptionPane;
 public class DataManager {
 	public ArrayList<File> Files = new ArrayList<File>();
 	private int chsize;
-	int fileId;
 	private int freeMemory = BlockMemory.count;
-	private ArrayList<DiskBlock> uzels = new ArrayList<DiskBlock>();;
 
 	public void CreateFile(int size, String name) {
-		chsize = 0;
-		fileId = Files.size();
+		chsize = 0; 
+
 		if (size > freeMemory) {
 			Main.textAreaWindow.append("Невозможно добавить файл! \n");
 			JOptionPane.showMessageDialog(null, "Недостаточно памяти!");
 			return;
-		}
-		else {
-			File file = new File(fileId, size, name);
+		} else {
+			File file = new File(Files.size(), size, name);
 			for (int i = 0; i <= BlockMemory.count; i++) {
-				if (size > chsize) {
-					if (BlockMemory.memory.get(i).getFileId() != -1) {
-						while (BlockMemory.memory.get(i).getFileId() != -1) {
-							i++;
-						}
+				if (size > chsize) { 
+					while (BlockMemory.memory.get(i).getFileId() != -1) {
+						i++;
 					}
-					int fileId = file.getId();
-					addUzel(BlockMemory.memory.get(i), fileId);
+					file.addBlock(i); 
+					BlockMemory.memory.get(i).setFileId(file.getId());
 					freeMemory--;
 					chsize++;
 				}
 				if (size == chsize) {
-					Files.add(fileId, file);
-					Main.textAreaWindow.append("Добавлен файл с именем "+name+" с №" + fileId + "\n");
+					Files.add(file);
+					Main.textAreaWindow.append("Добавлен файл с именем " + name + " с №" + file.getId() + "\n"); //123123412354125
 					Main.textAreaWindow.append("Свободно памяти:" + freeMemory + "\n");
 					return;
 				}
 			}
 		}
+
 	}
 
 	public void DeleteFile(int id) {
@@ -50,9 +46,14 @@ public class DataManager {
 			JOptionPane.showMessageDialog(null, "Данного файла не сущетвует!");
 			return;
 		} else {
+			 
 			freeMemory = freeMemory + Files.get(id).fileSize();
-			removeUzels(id);
-			Main.textAreaWindow.append("Удалён файл с именем "+Main.textId.getName()+" с № " + Main.textId.getText() + "\n");
+			for (int discBlock : Files.get(id).getIndexNode().getBlocks()) {
+				BlockMemory.memory.get(discBlock).setFileId(-1);
+			}
+			Files.remove(id);
+			Main.textAreaWindow
+					.append("Удалён файл с именем " + Main.textId.getName() + " с № " + Main.textId.getText() + "\n");
 		}
 		Main.textAreaWindow.append("Свободно памяти:" + freeMemory + "\n");
 
@@ -63,30 +64,16 @@ public class DataManager {
 			Main.textAreaWindow.append("Данного файла не сущетвует! \n");
 			JOptionPane.showMessageDialog(null, "Данного файла не сущетвует!");
 			return;
-		} else {
-			for (int i=0; i<uzels.size(); i++) {
-				DiskBlock uzel= uzels.get(i);
-				uzel.setSelectFlag(true);
+		} else { 
+			for (int discBlock : Files.get(id).getIndexNode().getBlocks()) {
+				BlockMemory.memory.get(discBlock).setSelectFlag(true);
 			}
 		}
 	}
 
-	public void cancelChoiceFile() {
-		for(int j=0; j<uzels.size(); j++) {
-			uzels.get(j).setSelectFlag(false);
+	public void cancelChoiceFile() { //123123412531453465542362546
+		for (int i = 0; i < BlockMemory.memory.size(); i++) {
+			BlockMemory.memory.get(i).setSelectFlag(false);
 		}
-	}
-	public void addUzel(DiskBlock uzel, int fileid) {
-		uzels.add(uzel);
-		uzel.setFile(fileid);
-	}
-
-	public void removeUzels(int fileId) {
-		for(int i=0; i<uzels.size(); i++) {
-			if (uzels.get(i).getFileId() == fileId) {
-				uzels.get(i).setFile(-1);
-			}
-		}
-		uzels.clear();
 	}
 }

@@ -5,15 +5,12 @@ public class File {
 	private int fileId;
 	private String fileName;
 
-	private DiskBlock uzel;
+	private IndexNode indexNode = new IndexNode(); 
 
 	public File(int fileId, int fileSize, String fileName) {
 		this.fileId = fileId;
 		this.fileSize = fileSize;
-		this.fileName=fileName;
-	}
-	public DiskBlock getUzel() {
-		return uzel.nextUzel();
+		this.fileName = fileName;
 	}
 
 	public int getId() {
@@ -23,7 +20,16 @@ public class File {
 	public int fileSize() {
 		return fileSize;
 	}
+
 	public String fileName() {
 		return fileName;
+	}
+
+	public IndexNode getIndexNode() {
+		return indexNode;
+	}
+
+	public void addBlock(int i) {
+		indexNode.addBlock(i);
 	}
 }
