@@ -1,12 +1,29 @@
+package laba4;
 
 public class File {
-	private IndexUzel uzel;
+	private int fileSize;
+	private int fileId;
+	private String fileName;
 
-	public File(IndexUzel uzel){
-		this.uzel = uzel;
+	private Uzel uzel;
+
+	public File(int fileId, int fileSize, String fileName) {
+		this.fileId = fileId;
+		this.fileSize = fileSize;
+		this.fileName=fileName;
+	}
+	public Uzel getUzel() {
+		return uzel.nextUzel();
 	}
 
-	public IndexUzel getUzel(){
-		return uzel;
+	public int getId() {
+		return fileId;
+	}
+
+	public int fileSize() {
+		return fileSize;
+	}
+	public String fileName() {
+		return fileName;
 	}
 }
