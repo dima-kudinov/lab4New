@@ -1,12 +1,12 @@
-package laba4;
 
-public class Uzel {
+
+public class DiskBlock {
 	private int uzelId;
 	private int fileId;
 	private boolean selectFlag;	
-	private Uzel uzel;
+	private DiskBlock uzel;
 
-	public Uzel(int fileId, int uzelId) {
+	public DiskBlock(int fileId, int uzelId) {
 		this.fileId = fileId;
 		this.uzelId = uzelId;
 	}
@@ -16,10 +16,10 @@ public class Uzel {
 	}
 
 	public void setUzel(int fileId, int knotId) {
-		uzel = new Uzel(fileId, knotId);
+		uzel = new DiskBlock(fileId, knotId);
 	}
 
-	public Uzel nextUzel() {
+	public DiskBlock nextUzel() {
 		return uzel;
 	}
 

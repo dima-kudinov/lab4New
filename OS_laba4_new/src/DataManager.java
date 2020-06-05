@@ -10,7 +10,7 @@ public class DataManager {
 	private int chsize;
 	int fileId;
 	private int freeMemory = BlockMemory.count;
-	private ArrayList<Uzel> uzels = new ArrayList<Uzel>();;
+	private ArrayList<DiskBlock> uzels = new ArrayList<DiskBlock>();;
 
 	public void CreateFile(int size, String name) {
 		chsize = 0;
@@ -65,7 +65,7 @@ public class DataManager {
 			return;
 		} else {
 			for (int i=0; i<uzels.size(); i++) {
-				Uzel uzel= uzels.get(i);
+				DiskBlock uzel= uzels.get(i);
 				uzel.setSelectFlag(true);
 			}
 		}
@@ -76,7 +76,7 @@ public class DataManager {
 			uzels.get(j).setSelectFlag(false);
 		}
 	}
-	public void addUzel(Uzel uzel, int fileid) {
+	public void addUzel(DiskBlock uzel, int fileid) {
 		uzels.add(uzel);
 		uzel.setFile(fileid);
 	}

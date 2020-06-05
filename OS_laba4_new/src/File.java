@@ -5,14 +5,14 @@ public class File {
 	private int fileId;
 	private String fileName;
 
-	private Uzel uzel;
+	private DiskBlock uzel;
 
 	public File(int fileId, int fileSize, String fileName) {
 		this.fileId = fileId;
 		this.fileSize = fileSize;
 		this.fileName=fileName;
 	}
-	public Uzel getUzel() {
+	public DiskBlock getUzel() {
 		return uzel.nextUzel();
 	}
 

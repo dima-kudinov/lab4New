@@ -5,13 +5,13 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class BlockMemory {
-	public static ArrayList<Uzel> memory;
+	public static ArrayList<DiskBlock> memory;
 	public static int count = 128;
 
 	public BlockMemory() {
-		memory = new ArrayList<Uzel>();
+		memory = new ArrayList<DiskBlock>();
 		for (int i = 0; i < count; i++) {
-			memory.add(i, new Uzel(-1, i));
+			memory.add(i, new DiskBlock(-1, i));
 		}
 	}
 	public void Visual_Memory(Graphics g, int width, int height) {
